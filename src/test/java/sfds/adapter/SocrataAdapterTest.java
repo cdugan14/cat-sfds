@@ -36,7 +36,7 @@ public class SocrataAdapterTest {
     private final String expectedStreetType = "street type";
 
     @Test
-    public void getAllProjects_shouldReturnListOfProjects() {
+    public void getAllProjects_shouldReturnOneProject() {
         ProjectResponse expectedProjectResponse = new ProjectResponse(expectedProjectId, expectedProjectName, expectedStreetNumber, expectedStreetName, expectedStreetType);
         AllProjectsResponse expectedAllProjectsResponse = new AllProjectsResponse(Arrays.asList(expectedProjectResponse));
 
@@ -50,4 +50,35 @@ public class SocrataAdapterTest {
         assertThat(actual.get(0).getStreetName(), is(expectedStreetName));
         assertThat(actual.get(0).getStreetType(), is(expectedStreetType));
     }
+
+    @Test
+    public void getAllProjects_shouldReturnListOfTwoProjects() {
+//        TODO: only tested 1 different value between expectedProjectResponse1 and
+//        expectedProjectResponse2. Would want to make all values different (maybe by
+//        adding a testing helper) to make sure we mapped all values correctly
+
+        String expectedProjectId2 = "project id 2";
+        ProjectResponse expectedProjectResponse1 = new ProjectResponse(expectedProjectId, expectedProjectName, expectedStreetNumber, expectedStreetName, expectedStreetType);
+        ProjectResponse expectedProjectResponse2 = new ProjectResponse(expectedProjectId2,
+                expectedProjectName, expectedStreetNumber, expectedStreetName, expectedStreetType);
+        AllProjectsResponse expectedAllProjectsResponse = new AllProjectsResponse(Arrays.asList(expectedProjectResponse1, expectedProjectResponse2));
+
+        when(restTemplate.getForObject(GET_PROJECTS_URL, AllProjectsResponse.class)).thenReturn(expectedAllProjectsResponse);
+
+        List<Project> actual = adapter.getAllProjects();
+
+        assertThat(actual.get(0).getProjectId(), is(expectedProjectId));
+        assertThat(actual.get(0).getProjectName(), is(expectedProjectName));
+        assertThat(actual.get(0).getStreetNumber(), is(expectedStreetNumber));
+        assertThat(actual.get(0).getStreetName(), is(expectedStreetName));
+        assertThat(actual.get(0).getStreetType(), is(expectedStreetType));
+
+        assertThat(actual.get(1).getProjectId(), is(expectedProjectId2));
+        assertThat(actual.get(1).getProjectName(), is(expectedProjectName));
+        assertThat(actual.get(1).getStreetNumber(), is(expectedStreetNumber));
+        assertThat(actual.get(1).getStreetName(), is(expectedStreetName));
+        assertThat(actual.get(1).getStreetType(), is(expectedStreetType));
+    }
+
+    //    TODO: Add tests to drive error handling
 }
