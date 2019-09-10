@@ -11,3 +11,6 @@ To run this application, from root directory you can run `./gradlew bootRun`. Th
 
 ### Running the tests
 To run the associated tests from the command line, run `./gradlew test`
+
+## Documentation of Note
+The Socrata API docs are [here](https://dev.socrata.com/foundry/data.sfgov.org/9rdx-httc)
