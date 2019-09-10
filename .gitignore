@@ -16,11 +16,9 @@ target/
 bin/
 dependency-reduced-pom.xml
 
-# Eclipse Project Files
+# Test output
+out/
 
-.classpath
-.project
-.settings/
 
 # IntelliJ IDEA Files
 
