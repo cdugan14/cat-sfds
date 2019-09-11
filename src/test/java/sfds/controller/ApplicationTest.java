@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = GreetingController.class)
+@WebMvcTest(controllers = AffordableProjectController.class)
 public class ApplicationTest {
 
     @Autowired
