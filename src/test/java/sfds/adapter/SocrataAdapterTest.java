@@ -7,7 +7,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.client.RestTemplate;
 import sfds.domain.Project;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -37,10 +36,10 @@ public class SocrataAdapterTest {
 
     @Test
     public void getAllProjects_shouldReturnOneProject() {
-        ProjectResponse expectedProjectResponse = new ProjectResponse(expectedProjectId, expectedProjectName, expectedStreetNumber, expectedStreetName, expectedStreetType);
-        AllProjectsResponse expectedAllProjectsResponse = new AllProjectsResponse(Arrays.asList(expectedProjectResponse));
+        Project expectedProjectResponse = new Project(expectedProjectId, expectedProjectName, expectedStreetNumber, expectedStreetName, expectedStreetType);
+        Project[] projectArray = {expectedProjectResponse};
 
-        when(restTemplate.getForObject(GET_PROJECTS_URL, AllProjectsResponse.class)).thenReturn(expectedAllProjectsResponse);
+        when(restTemplate.getForObject(GET_PROJECTS_URL, Project[].class)).thenReturn(projectArray);
 
         List<Project> actual = adapter.getAllProjects();
 
@@ -53,17 +52,18 @@ public class SocrataAdapterTest {
 
     @Test
     public void getAllProjects_shouldReturnListOfTwoProjects() {
-//        TODO: only tested 1 different value between expectedProjectResponse1 and
-//        expectedProjectResponse2. Would want to make all values different (maybe by
-//        adding a testing helper) to make sure we mapped all values correctly
+////        TODO: only tested 1 different value between expectedProjectResponse1 and
+////        expectedProjectResponse2. Would want to make all values different (maybe by
+////        adding a testing helper) to make sure we mapped all values correctly
 
         String expectedProjectId2 = "project id 2";
-        ProjectResponse expectedProjectResponse1 = new ProjectResponse(expectedProjectId, expectedProjectName, expectedStreetNumber, expectedStreetName, expectedStreetType);
-        ProjectResponse expectedProjectResponse2 = new ProjectResponse(expectedProjectId2,
+        Project expectedProjectResponse1 = new Project(expectedProjectId, expectedProjectName, expectedStreetNumber, expectedStreetName, expectedStreetType);
+        Project expectedProjectResponse2 = new Project(expectedProjectId2,
                 expectedProjectName, expectedStreetNumber, expectedStreetName, expectedStreetType);
-        AllProjectsResponse expectedAllProjectsResponse = new AllProjectsResponse(Arrays.asList(expectedProjectResponse1, expectedProjectResponse2));
 
-        when(restTemplate.getForObject(GET_PROJECTS_URL, AllProjectsResponse.class)).thenReturn(expectedAllProjectsResponse);
+        Project[] projectArray = {expectedProjectResponse1, expectedProjectResponse2};
+
+        when(restTemplate.getForObject(GET_PROJECTS_URL, Project[].class)).thenReturn(projectArray);
 
         List<Project> actual = adapter.getAllProjects();
 

@@ -1,6 +1,7 @@
 package sfds.adapter;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -24,6 +25,7 @@ public class SocrataAdapterIntegrationTest {
         adapter = new SocrataAdapter(restTemplate);
     }
 
+    @Ignore
     @Test
     public void getAllProjects_shouldReturnOneProject() {
         List<Project> actual = adapter.getAllProjects();
@@ -36,7 +38,7 @@ public class SocrataAdapterIntegrationTest {
         assertThat(actual.get(0).getStreetName(), is("Eddy"));
         assertThat(actual.get(0).getStreetType(), is("St"));
     }
-
+    @Ignore
     @Test
     public void getAllProjects_shouldReturnListOfTwoProjects() {
         Project project1 = new Project(
