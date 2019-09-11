@@ -1,6 +1,5 @@
 # cat-sfds
 
-## What is this?
 This application fetches data from the [DataSF portal](https://data.sfgov.org/Housing-and-Buildings/Mayor-s-Office-of-Housing-and-Community-Developmen/9rdx-httc) and displays it in a more accessible way.
 
 ## Developer Setup
