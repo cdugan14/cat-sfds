@@ -1,5 +1,10 @@
 # cat-sfds
 
+Thank you for your time reviewing! A couple notes as your get started:
+* I have a lot to learn for frontend implementation! I intentionally kept the frontend basic, and focused on displaying my backend capability. I would look forward to learning more about accessibility, responsive design, and all other things frontend.
+* There is a branch called `separate-response-objects-from-domain-object` that describes a refactor I would like to do to better separate our application's domain from Socrata's response formats.
+* With more time, I would refactor the fields I am fetching from Socrata to be more meaningful to the user. This represents a first pass to get everything wired together.
+
 This application fetches data from the [DataSF portal](https://data.sfgov.org/Housing-and-Buildings/Mayor-s-Office-of-Housing-and-Community-Developmen/9rdx-httc) and displays it in a more accessible way.
 
 ## Developer Setup
