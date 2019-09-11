@@ -7,8 +7,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.client.RestTemplate;
 import sfds.domain.Project;
 
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -38,7 +39,10 @@ public class SocrataAdapterTest {
     @Test
     public void getAllProjects_shouldReturnOneProject() {
         ProjectResponse expectedProjectResponse = new ProjectResponse(expectedProjectId, expectedProjectName, expectedStreetNumber, expectedStreetName, expectedStreetType);
-        AllProjectsResponse expectedAllProjectsResponse = new AllProjectsResponse(Arrays.asList(expectedProjectResponse));
+        Set<ProjectResponse> projectResponses = new HashSet<>();
+        projectResponses.add(expectedProjectResponse);
+
+        AllProjectsResponse expectedAllProjectsResponse = new AllProjectsResponse(projectResponses);
 
         when(restTemplate.getForObject(GET_PROJECTS_URL, AllProjectsResponse.class)).thenReturn(expectedAllProjectsResponse);
 
@@ -61,7 +65,12 @@ public class SocrataAdapterTest {
         ProjectResponse expectedProjectResponse1 = new ProjectResponse(expectedProjectId, expectedProjectName, expectedStreetNumber, expectedStreetName, expectedStreetType);
         ProjectResponse expectedProjectResponse2 = new ProjectResponse(expectedProjectId2,
                 expectedProjectName, expectedStreetNumber, expectedStreetName, expectedStreetType);
-        AllProjectsResponse expectedAllProjectsResponse = new AllProjectsResponse(Arrays.asList(expectedProjectResponse1, expectedProjectResponse2));
+
+        Set<ProjectResponse> projectResponses = new HashSet<>();
+        projectResponses.add(expectedProjectResponse1);
+        projectResponses.add(expectedProjectResponse2);
+
+        AllProjectsResponse expectedAllProjectsResponse = new AllProjectsResponse(projectResponses);
 
         when(restTemplate.getForObject(GET_PROJECTS_URL, AllProjectsResponse.class)).thenReturn(expectedAllProjectsResponse);
 

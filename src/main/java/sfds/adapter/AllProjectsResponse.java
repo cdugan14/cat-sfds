@@ -2,17 +2,17 @@ package sfds.adapter;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-import java.util.List;
+import java.util.Set;
 
 public class AllProjectsResponse {
-    private final List<ProjectResponse> projects;
+    private final Set<ProjectResponse> projects;
 
     @JsonCreator
-    public AllProjectsResponse(List<ProjectResponse> projects) {
+    public AllProjectsResponse(Set<ProjectResponse> projects) {
         this.projects = projects;
     }
 
-    public List<ProjectResponse> getProjects() {
+    public Set<ProjectResponse> getProjects() {
         return projects;
     }
 }
