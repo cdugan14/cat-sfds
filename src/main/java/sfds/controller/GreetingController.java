@@ -18,7 +18,8 @@ public class GreetingController {
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         socrataAdapter.getAllProjects();
-        model.addAttribute("name", name);
+        String projectId = socrataAdapter.getAllProjects().get(0).getProjectId();
+        model.addAttribute("name", name + projectId );
         return "greeting";
     }
 
