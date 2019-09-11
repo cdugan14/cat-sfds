@@ -5,9 +5,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import sfds.domain.Project;
 
+import java.util.Arrays;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @Component
 public class SocrataAdapter {
@@ -21,22 +20,9 @@ public class SocrataAdapter {
     }
 
     public List<Project> getAllProjects() {
-        AllProjectsResponse allProjectsResponse = restTemplate.getForObject(GET_PROJECTS_URL, AllProjectsResponse.class);
+        Project[] allProjectsResponse = restTemplate.getForObject(GET_PROJECTS_URL, Project[].class);
 
-        List<Project> projects = allProjectsResponse
-                .getProjects()
-                .stream()
-                .map(
-                        projectResponse ->
-                                new Project(
-                                projectResponse.getProjectId(),
-                                projectResponse.getProjectName(),
-                                projectResponse.getStreetNumber(),
-                                projectResponse.getStreetName(),
-                                projectResponse.getStreetType()
-                                )
-                ).collect(toList());
-
+        List<Project> projects = Arrays.asList(allProjectsResponse);
         return projects;
     }
 }

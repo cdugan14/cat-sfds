@@ -1,7 +1,12 @@
 package sfds.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Project {
     private final String projectId;
     private final String projectName;
@@ -9,7 +14,12 @@ public class Project {
     private final String streetName;
     private final String streetType;
 
-    public Project(String projectId, String projectName, String streetNumber, String streetName, String streetType) {
+    @JsonCreator
+    public Project(@JsonProperty("project_id") String projectId,
+                   @JsonProperty("project_name") String projectName,
+                   @JsonProperty("street_number") String streetNumber,
+                   @JsonProperty("street_name") String streetName,
+                   @JsonProperty("street_type") String streetType) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.streetNumber = streetNumber;
