@@ -12,6 +12,7 @@ import static java.util.stream.Collectors.toList;
 @Component
 public class SocrataAdapter {
     private static final String GET_PROJECTS_URL = "/resource/9rdx-httc.json";
+//    private static final String GET_PROJECTS_URL = "https://data.sfgov.org/resource/9rdx-httc.json";
 
     private final RestTemplate restTemplate;
 

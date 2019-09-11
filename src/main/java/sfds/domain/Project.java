@@ -1,5 +1,7 @@
 package sfds.domain;
 
+import java.util.Objects;
+
 public class Project {
     private final String projectId;
     private final String projectName;
@@ -34,4 +36,34 @@ public class Project {
     public String getStreetType() {
         return streetType;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "projectId='" + projectId + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", streetNumber='" + streetNumber + '\'' +
+                ", streetName='" + streetName + '\'' +
+                ", streetType='" + streetType + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project project = (Project) o;
+        return Objects.equals(projectId, project.projectId) &&
+                Objects.equals(projectName, project.projectName) &&
+                Objects.equals(streetNumber, project.streetNumber) &&
+                Objects.equals(streetName, project.streetName) &&
+                Objects.equals(streetType, project.streetType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(projectId, projectName, streetNumber, streetName, streetType);
+    }
+
+
 }
