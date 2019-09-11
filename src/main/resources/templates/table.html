@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Mayor's Office of Housing and Community Development Affordable Rental Portfolio</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+    <p> Affordable rental housing developed in partnership with non-profit and private developers and financed by the Mayor’s Office of Housing and Community Development (MOHCD) and the Office of Community Investment and Infrastructure (OCII) through City Funding Agreements, Ground Leases, Disposition & Participation Agreements and Conduit Mortgage Revenue Bond Financing, as of December 31, 2018. </p>
+
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th>Project Id</th>
+                <th>Project Name</th>
+                <th>Street Number</th>
+                <th>Street Name</th>
+                <th>Street Type</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="pl : ${projectList}">
+                <td th:text="${{pl.getProjectId()}}">13/01/2011</td>
+                <td th:text="${{pl.getProjectName()}}">123</td>
+                <td th:text="${{pl.getStreetNumber()}}">123</td>
+                <td th:text="${{pl.getStreetName()}}">123</td>
+                <td th:text="${{pl.getStreetType()}}">123</td>
+        </tbody>
+    </table>
+</body>
+</html>
