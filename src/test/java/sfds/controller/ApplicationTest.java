@@ -20,10 +20,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import sfds.adapter.SocrataAdapter;
+import sfds.domain.Project;
+
+import java.util.Arrays;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
@@ -31,26 +38,34 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = AffordableProjectController.class)
 public class ApplicationTest {
 
+    @MockBean
+    private SocrataAdapter adapter;
+
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void homePage() throws Exception {
-        // N.B. jsoup can be useful for asserting HTML content
+    public void homePage_shouldIncludeExpectedText() throws Exception {
         mockMvc.perform(get("/index.html"))
-                .andExpect(content().string(containsString("Get your greeting")));
+                .andExpect(content().string(containsString("Welcome to the Mayor's Office")));
     }
 
     @Test
-    public void greeting() throws Exception {
-        mockMvc.perform(get("/greeting"))
-                .andExpect(content().string(containsString("Hello, World!")));
+    public void getAffordableProjects_shouldIncludeExpectedText() throws Exception {
+        Project mockProject = mock(Project.class);
+        when(adapter.getAllProjects()).thenReturn(Arrays.asList(mockProject));
+        mockMvc.perform(get("/housing"))
+                .andExpect(content().string(containsString("Affordable rental housing developed")));
     }
 
     @Test
-    public void greetingWithUser() throws Exception {
-        mockMvc.perform(get("/greeting").param("name", "Greg"))
-                .andExpect(content().string(containsString("Hello, Greg!")));
+    public void getAffordableProjects_shouldIncludeDataInTable() throws Exception {
+        Project mockProject = mock(Project.class);
+        String projectId = "i am a project id";
+        when(mockProject.getProjectId()).thenReturn(projectId);
+        when(adapter.getAllProjects()).thenReturn(Arrays.asList(mockProject));
+        mockMvc.perform(get("/housing"))
+                .andExpect(content().string(containsString(projectId)));
     }
 
 }
